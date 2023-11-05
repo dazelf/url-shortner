@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Exclude specific file extensions from the redirection
+RewriteRule \.(css|js|png)$ - [L]
+
+# Redirect all other requests to single-page.php
+RewriteRule ^(.*)$ index.php [L]
