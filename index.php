@@ -82,6 +82,23 @@ if ($name != "") {
               <div class="my-2 message-text">
                 <strong>Shortened URL : </strong> <a target="_blank" href="<?php echo $c_url . $text  ?>"><?php echo $c_url . $text  ?></a>
               </div>
+              <script>
+                var urls = JSON.parse(localStorage.getItem('urls'));
+                if (!urls) {
+                  urls = [];
+                  urls.push({
+                    link: "<?php echo $c_url . $text ?>",
+                    url: "<?php echo $url ?>"
+                  });
+                  localStorage.setItem('urls', JSON.stringify(urls));
+                } else {
+                  urls.push({
+                    link: "<?php echo $c_url . $text ?>",
+                    url: "<?php echo $url ?>"
+                  });
+                  localStorage.setItem('urls', JSON.stringify(urls));
+                }
+              </script>
         <?php
             }
           }
@@ -101,12 +118,28 @@ if ($name != "") {
     <?php
     }
     ?>
+
+    <div class="shortened-urls-container my-4">
+      <strong>Your Shortened Urls:</strong>
+      <div class="shortend-urls">
+      </div>
+    </div>
   </div>
+
 
   <footer class="text-center footer">
     Powered By <a href="https://dazelf.com" class="title text-decoration-none">Dazelf Labs</a>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+  <script>
+    const items = JSON.parse(localStorage.getItem('urls'))
+    if (items.length) {
+      for (let index = 0; index < items.length; index++) {
+        const item = items[index];
+        document.getElementsByClassName('shortend-urls')[0].innerHTML += `<div><a target='_blank' class='shortened-url text-decoration-none' href='${item.url}'>${item.link}</a></div>`;
+      }
+    }
+  </script>
 </body>
 
 </html>

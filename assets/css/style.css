@@ -55,3 +55,8 @@
 .message-text a {
   color: var(--primary_color) !important;
 }
+
+.shortened-url {
+  color: var(--primary_color) !important;
+  font-family: var(--primary_font);
+}
